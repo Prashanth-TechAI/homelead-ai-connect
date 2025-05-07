@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { X, CheckCircle } from "lucide-react";
+import { X, CheckCircle, Server, Database, MessageSquare } from "lucide-react";
 
 interface WelcomeScreenProps {
   companyName: string;
@@ -16,7 +16,7 @@ const WelcomeScreen = ({ companyName, onClose, onStartChat }: WelcomeScreenProps
         <CardHeader className="bg-slate-800 text-white flex flex-row items-center justify-between p-4">
           <div className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/26458218-528c-4c3f-b200-bcbd94b8f28a.png" 
+              src="/lovable-uploads/fb4ff85b-8993-429f-8a1b-338eb18944fe.png" 
               alt="HomeLead AI Logo" 
               className="h-8 w-8"
             />
@@ -28,7 +28,7 @@ const WelcomeScreen = ({ companyName, onClose, onStartChat }: WelcomeScreenProps
         </CardHeader>
         <CardContent className="p-4">
           <div className="space-y-4 py-2">
-            <h2 className="text-xl font-semibold">Hello {companyName}!</h2>
+            <h2 className="text-xl font-semibold">HELLO! {companyName}!</h2>
             <p className="text-slate-600">How can we help you today?</p>
             
             <div className="bg-slate-50 p-3 rounded-md flex items-center space-x-2">
@@ -37,14 +37,17 @@ const WelcomeScreen = ({ companyName, onClose, onStartChat }: WelcomeScreenProps
             </div>
             
             <div className="space-y-2">
-              <div className="border-b border-slate-200 py-2">
-                <p className="text-sm text-slate-700">Lead Generation Services</p>
+              <div className="border-b border-slate-200 py-2 flex items-center space-x-2">
+                <MessageSquare className="h-4 w-4 text-slate-500" />
+                <p className="text-sm text-slate-700">Semantic Pipeline - LLM + Qdrant</p>
               </div>
-              <div className="border-b border-slate-200 py-2">
-                <p className="text-sm text-slate-700">Property Analysis Tools</p>
+              <div className="border-b border-slate-200 py-2 flex items-center space-x-2">
+                <Database className="h-4 w-4 text-slate-500" />
+                <p className="text-sm text-slate-700">Analytical Pipeline - PandasAI + Postgres</p>
               </div>
-              <div className="border-b border-slate-200 py-2">
-                <p className="text-sm text-slate-700">Customer Support</p>
+              <div className="border-b border-slate-200 py-2 flex items-center space-x-2">
+                <Server className="h-4 w-4 text-slate-500" />
+                <p className="text-sm text-slate-700">Real-time Data Sync</p>
               </div>
             </div>
           </div>

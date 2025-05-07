@@ -12,6 +12,7 @@ interface SignInFormProps {
 const SignInForm = ({ onSignIn }: SignInFormProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [companyId, setCompanyId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,12 +22,14 @@ const SignInForm = ({ onSignIn }: SignInFormProps) => {
       return;
     }
     
-    // Simulate API call
+    setIsLoading(true);
+    
+    // Simulate API call to /company/select
     setTimeout(() => {
       onSignIn(companyId);
       setIsOpen(false);
-      toast.success(`Welcome, ${companyId}!`);
-    }, 500);
+      setIsLoading(false);
+    }, 800);
   };
 
   return (
@@ -46,7 +49,9 @@ const SignInForm = ({ onSignIn }: SignInFormProps) => {
             onChange={(e) => setCompanyId(e.target.value)}
           />
           <div className="flex justify-end">
-            <Button type="submit">Login</Button>
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? "Connecting..." : "Login"}
+            </Button>
           </div>
         </form>
       </PopoverContent>

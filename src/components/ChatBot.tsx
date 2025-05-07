@@ -37,13 +37,49 @@ const ChatBot = ({ messages, onSendMessage, onClose, companyName }: ChatBotProps
     }
   };
 
+  const renderSuggestedQuestions = () => {
+    // Get the last bot message
+    const lastBotMessage = [...messages].reverse().find(msg => msg.sender === "bot");
+    
+    // Check if it has suggested questions (format: "text [question1, question2]")
+    if (lastBotMessage && lastBotMessage.text.includes("[")) {
+      const match = lastBotMessage.text.match(/\[(.*?)\]/);
+      if (match && match[1]) {
+        const questions = match[1].split(",").map(q => q.trim());
+        if (questions.length > 0) {
+          return (
+            <div className="px-4 pb-2">
+              <p className="text-xs text-slate-500 mb-1">Suggested questions:</p>
+              <div className="flex flex-wrap gap-1">
+                {questions.map((question, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setMessage(question);
+                      // Focus input after setting message
+                      setTimeout(() => handleSend(), 100);
+                    }}
+                    className="text-xs bg-slate-100 hover:bg-slate-200 rounded px-2 py-1 text-slate-700"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        }
+      }
+    }
+    return null;
+  };
+
   return (
     <div className="fixed bottom-6 right-6 w-80 md:w-96 shadow-lg rounded-lg overflow-hidden z-50 flex flex-col">
       <Card className="border-0 flex flex-col h-[500px]">
         <CardHeader className="bg-slate-800 text-white flex flex-row items-center justify-between p-4 shrink-0">
           <div className="flex items-center space-x-2">
             <img 
-              src="/lovable-uploads/26458218-528c-4c3f-b200-bcbd94b8f28a.png" 
+              src="/lovable-uploads/fb4ff85b-8993-429f-8a1b-338eb18944fe.png" 
               alt="HomeLead AI Logo" 
               className="h-6 w-6"
             />
@@ -78,6 +114,8 @@ const ChatBot = ({ messages, onSendMessage, onClose, companyName }: ChatBotProps
             <div ref={messagesEndRef} />
           </div>
         </CardContent>
+
+        {renderSuggestedQuestions()}
 
         <CardFooter className="p-2 border-t flex items-center gap-2">
           <Input
